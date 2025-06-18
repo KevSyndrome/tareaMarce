@@ -9,6 +9,21 @@ export default function ScreenCrearCuenta() {
     const [text2, setText2] = React.useState("");
     const [email, setEmail] = React.useState("");
     const navigation = useNavigation();
+
+    const crearAcceso = async ()=>{
+        if (email === '' || text === '' || text1 === '' || text2 === '') {
+            alert('Por favor, complete todos los campos');
+            return;
+        }
+        if (text1 !== text2) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+        // Aquí puedes agregar la lógica para crear la cuenta
+        // Por ejemplo, enviar una solicitud a tu API
+        console.log("Cuenta creada con:", { email, username: text, password: text1 });
+        navigation.navigate('home'); // Navegar a la pantalla de inicio después de crear la cuenta
+    }
     return (
         <KeyboardAvoidingView
             style={{ flex: 1, backgroundColor: '#f0f0f0' }}

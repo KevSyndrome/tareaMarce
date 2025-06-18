@@ -12,10 +12,11 @@ export default function ScreenSetting() {
   return (
     <View>
       <Text>ScreenSetting</Text>
-      <Button title='LogOut' onPress={loginOut}>
+      <Button title='LogOut' onPress={()=>loginOut()}>
       </Button>
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+})

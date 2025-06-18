@@ -15,8 +15,14 @@ console.log(contador);
   return (
     <View>
       <Text>ScreenHome</Text>
-      <Button icon="" mode="contained" onPress={()=>navigation.push('luces')}>
-        Press me
+      <Button style={styles.botones} icon="home" mode="contained" onPress={()=>navigation.push('detalles')}>
+        Home Detalles
+      </Button>
+      <Button style={styles.botones} icon="home" mode="contained" onPress={()=>navigation.push('luces')}>
+        Luces Casa
+      </Button>
+      <Button style={styles.botones}  icon="door" mode="contained" onPress={()=>navigation.push('puertas')}>
+        Puertas Casa
       </Button>
       <Card>
         <Text>
@@ -29,4 +35,11 @@ console.log(contador);
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  botones:{
+    margin: 10,
+    padding: 10,
+    color: 'white',
+    backgroundColor: 'purple',
+  },
+})
