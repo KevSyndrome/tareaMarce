@@ -13,6 +13,8 @@ import HomeDetalles from "./src/screen/home/HomeDetalles";
 import LucesCasa from "./src/screen/home/LucesCasa";
 import PuertasCasa from "./src/screen/home/PuertasCasa";
 
+//screen de perfil
+import PerfilEdit from "./src/screen/setting/PerfilEdit";
 // Screens de login
 import ScreenLogin from "./src/screen/login/ScreenLogin";
 import ScreenCrearCuenta from "./src/screen/login/ScreenCrearCuenta";
@@ -50,6 +52,20 @@ function MyStackHome() {
             />
         </Stack.Navigator>
     );
+}
+function MyStackSetting() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="setting"
+        component={ScreenSetting}
+      />
+      <Stack.Screen
+        name="perfil"
+        component={PerfilEdit}
+      />
+    </Stack.Navigator>
+  );
 }
 function MystackLogin(){
     return(
@@ -103,9 +119,9 @@ function Mytabs(){
             />
             <Tab.Screen
             name="setting"
-            component={ScreenSetting}
+            component={MyStackSetting}
             options={{title: 'Config',
-                headerShown: true, // Ocultar el encabezado de la pantalla
+                headerShown: false, // Ocultar el encabezado de la pantalla
                 tabBarLabelPosition: 'beside-icon', // Etiqueta al lado del icono
                 tabBarBadge:8, // Número de notificaciones
                 tabBarBadgeStyle: { backgroundColor: 'red' }, // Estilo de la insignia

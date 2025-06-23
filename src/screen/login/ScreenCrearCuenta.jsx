@@ -4,25 +4,54 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 
 export default function ScreenCrearCuenta() {
-    const [text, setText] = React.useState("");
-    const [text1, setText1] = React.useState("");
-    const [text2, setText2] = React.useState("");
+    const [user, setUser] = React.useState("");
+    const [pass, setPass] = React.useState("");
+    const [confpass, setConfpass] = React.useState("");
     const [email, setEmail] = React.useState("");
     const navigation = useNavigation();
 
-    const crearAcceso = async ()=>{
-        if (email === '' || text === '' || text1 === '' || text2 === '') {
+    const crearAcceso = async () => {
+        if (email === '' || user === '' || pass === '' || confpass === '') {
             alert('Por favor, complete todos los campos');
             return;
         }
-        if (text1 !== text2) {
+        if (pass !== confpass) {
             alert('Las contraseñas no coinciden');
             return;
+        } else {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            const raw = JSON.stringify({
+                "id": 0,
+                "nombre": user,
+                "pw": pass,
+                "email": email,
+                "status": "1"
+            });
+
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+            };
+
+            try {
+                const response = await fetch("http://192.168.1.110:4000/api/usuario/agregar", requestOptions);
+                const result = await response.text();
+                console.log(result)
+                if (result) {
+                    alert("Usuario creado correctamente");
+                    navigation.navigate('login');
+                } else {
+                    alert("Error al crear el usuario");
+                }
+            } catch (error) {
+                console.error(error);
+            };
         }
-        // Aquí puedes agregar la lógica para crear la cuenta
-        // Por ejemplo, enviar una solicitud a tu API
-        console.log("Cuenta creada con:", { email, username: text, password: text1 });
-        navigation.navigate('home'); // Navegar a la pantalla de inicio después de crear la cuenta
+
     }
     return (
         <KeyboardAvoidingView
@@ -44,28 +73,28 @@ export default function ScreenCrearCuenta() {
                     <TextInput
                         style={styles.input}
                         label="Nombre de usuario"
-                        value={text}
-                        onChangeText={setText}
+                        value={user}
+                        onChangeText={setUser}
                         mode="outlined"
                         autoCapitalize="none"
                     />
                     <TextInput
                         style={styles.input}
                         label="Contraseña"
-                        value={text1}
-                        onChangeText={setText1}
+                        value={pass}
+                        onChangeText={setPass}
                         mode="outlined"
                         secureTextEntry
                     />
                     <TextInput
                         style={styles.input}
                         label="Confirmar Contraseña"
-                        value={text2}
-                        onChangeText={setText2}
+                        value={confpass}
+                        onChangeText={setConfpass}
                         mode="outlined"
                         secureTextEntry
                     />
-                    <Button style={styles.boton} icon="login" mode="contained" onPress={() => navigation.navigate('home')}>
+                    <Button style={styles.boton} icon="login" mode="contained" onPress={() => crearAcceso()}>
                         Crear cuenta
                     </Button>
                     <Button style={styles.botonCrear} mode="text" onPress={() => navigation.navigate('login')}>

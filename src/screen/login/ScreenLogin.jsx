@@ -12,12 +12,15 @@ export default function ScreenLogin() {
     const [password, setPassword] = React.useState("");
     const navigation = useNavigation();
     const { login } = useContext(estadoPerfilGlobal);
+    const api= process.env.EXPO_PUBLIC_API_URL;
+
 
     const acceso = async () => {
         if (email === '' || password === '') {
             alert('Por favor, ingrese su email y contraseña');
             return;
         }
+
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -35,18 +38,20 @@ export default function ScreenLogin() {
         };
 
         try {
-            const response = await fetch("http://192.168.1.110:4000/api/usuario/login", requestOptions);
+            const response = await fetch(`${api}/api/usuario/login`, requestOptions);
             const result = await response.json(); // <-- Procesa como JSON
             console.log("Respuesta del backend:", result);
-            if (result.body?.status) { // <-- Valida el campo 'status'
+            
+            if (result.body.status == true) { // <-- Valida el campo 'status'
                 login();
             } else {
-                alert(result.body?.mensaje || "Correo o contraseña incorrectos");
-            }
+                alert(result.body.mensaje || "Correo o contraseña incorrectos");
+            }   
         } catch (error) {
             alert("Error de red o servidor");
             console.error(error);
         }
+        Keyboard.dismiss(); // <-- Cierra el teclado al hacer login
     }
     return (
         <View>
@@ -116,3 +121,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 })
+
+
+
