@@ -38,7 +38,7 @@ export default function ScreenCrearCuenta() {
             };
 
             try {
-                const response = await fetch("http://192.168.1.110:4000/api/usuario/agregar", requestOptions);
+                const response = await fetch("http://localhost:4000/api/usuario/agregar", requestOptions);
                 const result = await response.text();
                 console.log(result)
                 if (result) {
