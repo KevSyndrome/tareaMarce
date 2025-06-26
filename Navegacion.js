@@ -137,11 +137,11 @@ function Mytabs(){
 export default function Navegacion() {
     const {isLogin} = useContext(estadoPerfilGlobal);
     return(
-      /*  <>
+        <>
         {isLogin ? <Mytabs/> : <MystackLogin/>}
         </>
-        */
-       <Mytabs/>
+        
+      
     ) ;
     
 }

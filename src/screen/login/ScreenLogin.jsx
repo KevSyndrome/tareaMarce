@@ -38,7 +38,7 @@ export default function ScreenLogin() {
         };
 
         try {
-            const response = await fetch("http://192.168.1.110:4000/api/usuario/login", requestOptions);
+            const response = await fetch(`${api}/api/usuario/login`, requestOptions);
             const result = await response.json(); // <-- Procesa como JSON
             console.log("Respuesta del backend:", result);
             

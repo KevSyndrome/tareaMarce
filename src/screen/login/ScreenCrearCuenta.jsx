@@ -9,6 +9,8 @@ export default function ScreenCrearCuenta() {
     const [confpass, setConfpass] = React.useState("");
     const [email, setEmail] = React.useState("");
     const navigation = useNavigation();
+    const api= process.env.EXPO_PUBLIC_API_URL;
+
 
     const crearAcceso = async () => {
         if (email === '' || user === '' || pass === '' || confpass === '') {
@@ -38,7 +40,7 @@ export default function ScreenCrearCuenta() {
             };
 
             try {
-                const response = await fetch("http://localhost:4000/api/usuario/agregar", requestOptions);
+                const response = await fetch(`${api}/api/usuario/agregar`, requestOptions);
                 const result = await response.text();
                 console.log(result)
                 if (result) {

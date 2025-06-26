@@ -4,10 +4,11 @@ import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 export default function LucesCasa() {
   const [luces, setLuces] = useState([]);
+  const api= process.env.EXPO_PUBLIC_API_URL;
 
   const obtenerLuces = async () => { //uso de api para obtener primero las luces
     try {
-      const response = await fetch("http://192.168.1.110:4000/api/luces"); // Cambia TU_IP_LOCAL por tu IP real
+      const response = await fetch(`${api}/api/luces`); // Cambia TU_IP_LOCAL por tu IP real
       const result = await response.json();
       setLuces(result.body || []); // Ajusta según la estructura de tu API
     } catch (error) {
@@ -36,7 +37,7 @@ export default function LucesCasa() {
     };
 
     try {
-      const response = await fetch("http://192.168.1.110:4000/api/luces/agregar", requestOptions);
+      const response = await fetch(`${api}/api/luces/agregar`, requestOptions);
       const result = await response.json();
       if (result.status) {
         obtenerLuces(); // Refresca la lista de luces
